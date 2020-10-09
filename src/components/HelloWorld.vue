@@ -14,7 +14,9 @@
 </template>
 
 <script>
-export default {
+import Vue from 'vue';
+
+export default Vue.extend({
   name: 'HelloWorld',
   props: {
     msg: {
@@ -22,7 +24,7 @@ export default {
       default: '',
     },
   },
-};
+});
 </script>
 
 <style>
