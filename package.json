@@ -6,10 +6,22 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "ssr:build": "vue-cli-service ssr:build",
+    "ssr:fix": "vue-cli-service ssr:fix",
+    "ssr:fix-vuex": "vue-cli-service ssr:fix-vuex",
+    "ssr:serve": "vue-cli-service ssr:serve",
+    "ssr:start": "vue-cli-service ssr:start",
+    "ssr:static": "vue-cli-service ssr:static"
   },
   "dependencies": {
+    "@uvue/core": "^0.1.0",
+    "@uvue/server": "^0.1.0",
+    "compression": "^1.7.3",
+    "connect": "^3.6.6",
+    "cookie-parser": "^1.4.3",
     "core-js": "^3.6.5",
+    "serve-static": "^1.13.2",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0"
   },
@@ -17,6 +29,7 @@
     "@types/jest": "^24.0.19",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
     "@typescript-eslint/parser": "^2.33.0",
+    "@uvue/vue-cli-plugin-ssr": "~0.1.7",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-plugin-router": "~4.5.0",
