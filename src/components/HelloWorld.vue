@@ -15,22 +15,21 @@
 
 <script>
 export default {
-  name: "HelloWorld",
+  name: 'HelloWorld',
   props: {
     msg: {
       type: String,
-      default: ""
-    }
-  }
+      default: '',
+    },
+  },
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-@import url("https://fonts.googleapis.com/css?family=Nunito:300,400");
+@import url('https://fonts.googleapis.com/css?family=Nunito:300,400');
 
 body {
-  font-family: "Nunito", sans-serif;
+  font-family: 'Nunito', sans-serif;
 }
 
 h1 {
