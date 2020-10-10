@@ -43,7 +43,6 @@ export default Vue.extend({
     const articles = await getBlogArticles();
     this.currentArticle = articles.find(article => {
       const title = article.attributes.title;
-      console.log(title.toLowerCase());
       return currentRoute?.toLowerCase().indexOf(title.toLowerCase()) > -1;
     });
   },
