@@ -1,24 +1,15 @@
 import { ProjectOptions } from '@vue/cli-service';
-import path from 'path'; // eslint-disable-line @typescript-eslint/no-var-requires
+import path from 'path';
+import dirTree from 'directory-tree';
 
-// const recursive = require('recursive-readdir'); // eslint-disable-line @typescript-eslint/no-var-requires
-
-import dirTree from 'directory-tree'; // eslint-disable-line @typescript-eslint/no-var-requires
-
+/**
+ * Parses the `src/_content` directory for markdown files
+ * and returns the directory tree.
+ */
 const generateContentLibrary = () => {
   const tree = dirTree('./src/_content', { extensions: /\.md/ });
 
-  // const library = {};
-
-  // function createDirectory(pathObject) {
-
-  // }
-
-  // library[tree.name]
-  // if (tree.children) {
-
-  // }
-  console.log(JSON.stringify(tree));
+  return tree;
 };
 
 const configuration: ProjectOptions = {
@@ -48,9 +39,9 @@ const configuration: ProjectOptions = {
     });
     config.plugin('define').tap(definitions => {
       generateContentLibrary();
-      definitions[0]['process.env']['CONTENT_LIBRARY'] = JSON.stringify({
-        foo: 'bar',
-      });
+      definitions[0]['process.env']['CONTENT_LIBRARY'] = JSON.stringify(
+        generateContentLibrary(),
+      );
       return definitions;
     });
   },
