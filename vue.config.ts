@@ -1,15 +1,45 @@
 import { ProjectOptions } from '@vue/cli-service';
+import MarkDownIt from 'markdown-it';
+import fm, { FrontMatterResult } from 'front-matter';
 import path from 'path';
+import fs from 'fs';
 import dirTree from 'directory-tree';
+
+export interface ArticleMarkdownFile {
+  title: string;
+}
+
+export interface ContentLibraryDataObject extends dirTree.DirectoryTree {
+  fileContent?: FrontMatterResult<ArticleMarkdownFile>;
+  htmlContent?: string;
+  contentLibraryChildren?: ContentLibraryDataObject[];
+}
 
 /**
  * Parses the `src/_content` directory for markdown files
  * and returns the directory tree.
  */
-const generateContentLibrary = () => {
-  const tree = dirTree('./src/_content', { extensions: /\.md/ });
+const generateContentLibrary = (
+  tree: directoryTree.DirectoryTree,
+): ContentLibraryDataObject => {
+  const markdown = new MarkDownIt();
+  let fileContent: FrontMatterResult<ArticleMarkdownFile> | undefined;
+  let htmlContent: string | undefined;
 
-  return tree;
+  if (tree.type !== 'directory') {
+    const file = fs.readFileSync(path.resolve(__dirname, tree.path));
+
+    fileContent = fm<ArticleMarkdownFile>(file.toString());
+    htmlContent = markdown.render(fileContent.body);
+  }
+
+  return Object.assign(tree, {
+    fileContent: fileContent,
+    htmlContent: htmlContent,
+    contentLibraryChildren: tree.children?.map(child =>
+      generateContentLibrary(child),
+    ),
+  });
 };
 
 const configuration: ProjectOptions = {
@@ -39,7 +69,9 @@ const configuration: ProjectOptions = {
     });
     config.plugin('define').tap(definitions => {
       definitions[0]['process.env']['CONTENT_LIBRARY'] = JSON.stringify(
-        generateContentLibrary(),
+        generateContentLibrary(
+          dirTree('./src/_content', { extensions: /\.md/ }),
+        ),
       );
       return definitions;
     });

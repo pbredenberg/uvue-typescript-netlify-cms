@@ -1,13 +1,13 @@
 import Vue from 'vue';
 import VueRouter, { RouteConfig } from 'vue-router';
-import directoryTree from 'directory-tree';
+import { ContentLibraryDataObject } from '../../vue.config';
 import Home from '../views/Home.vue';
 import Blog from '../components/Blog.vue';
 import BlogPost from '../components/BlogPost.vue';
 
 Vue.use(VueRouter);
 
-const routes: Array<RouteConfig> = [
+let routes: Array<RouteConfig> = [
   {
     path: '/',
     name: 'Home',
@@ -36,11 +36,13 @@ export default () => {
    * object provided.
    * @param file
    */
-  const buildLibraryRoutesFromTree = function(
-    file: directoryTree.DirectoryTree,
+  const buildLibraryRoutes = function(
+    file: ContentLibraryDataObject,
   ): RouteConfig {
     // Exclude content directory from what will become the route URL.
     const routePath = file.path.replace('src/_content', '');
+
+    const isDirectory = file.type === 'directory';
 
     return {
       // If an extension is defined, remove that from the route path.
@@ -48,19 +50,23 @@ export default () => {
       // TODO: Provide more generic default route components other than "Blog"
       // and "BlogPost," with the intention that users should be able to  implement
       // their own custom component types.
-      component: file.type === 'directory' ? Blog : BlogPost,
+      component: isDirectory ? Blog : BlogPost,
+      props: {
+        fileContent: file.fileContent,
+        htmlContent: file.htmlContent,
+      },
       children:
-        file.children && file.children.length > 0
-          ? file.children.map(file => buildLibraryRoutesFromTree(file))
+        file.contentLibraryChildren && file.contentLibraryChildren.length > 0
+          ? file.contentLibraryChildren.map(file => buildLibraryRoutes(file))
           : [],
     };
   };
 
-  const contentRoutes = (contentLibrary as directoryTree.DirectoryTree)?.children?.map(
-    file => buildLibraryRoutesFromTree(file),
+  const contentRoutes = (contentLibrary as ContentLibraryDataObject)?.contentLibraryChildren?.map(
+    file => buildLibraryRoutes(file),
   );
 
-  routes.concat(contentRoutes || []);
+  routes = routes.concat(contentRoutes || []);
 
   const router = new VueRouter({
     mode: 'history',

@@ -22,13 +22,13 @@
     "cookie-parser": "^1.4.3",
     "core-js": "^3.6.5",
     "markdown-it": "11.0.1",
-    "markdown-it-vue": "1.1.4",
     "serve-static": "^1.13.2",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0"
   },
   "devDependencies": {
     "@types/jest": "^24.0.19",
+    "@types/markdown-it": "10.0.2",
     "@types/node": "14.11.8",
     "@types/vue-markdown": "2.2.1",
     "@typescript-eslint/eslint-plugin": "^2.33.0",

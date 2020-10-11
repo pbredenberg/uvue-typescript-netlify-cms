@@ -1,39 +1,31 @@
 <template>
   <div class="blog__post">
-    <article v-if="content">
-      <VueMarkdown>{{ content }}</VueMarkdown>
-    </article>
+    <article v-html="this.htmlContent"></article>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import VueMarkdown from 'vue-markdown';
 import { FrontMatterResult } from 'front-matter';
 import { PropValidator } from 'vue/types/options';
+import { ArticleMarkdownFile } from 'vue.config';
 
-import { BlogArticleMarkdownFile } from './Blog.vue';
+export interface BlogArticleMarkdownFile extends ArticleMarkdownFile {
+  date: string;
+}
 
 export default Vue.extend({
   name: 'BlogPost',
-  components: {
-    VueMarkdown,
-  },
   props: {
-    fileContents: {
+    fileContent: {
       type: Object,
-      default: () => {
-        return undefined;
-      },
-    } as PropValidator<FrontMatterResult<BlogArticleMarkdownFile> | undefined>,
-  },
-  computed: {
-    content(): string | undefined {
-      return this.fileContents?.body;
+    } as PropValidator<FrontMatterResult<BlogArticleMarkdownFile>>,
+    htmlContent: {
+      type: String,
     },
   },
   mounted() {
-    console.log(JSON.stringify(this.fileContents));
+    console.log(this.fileContent, this.htmlContent);
   },
 });
 </script>
