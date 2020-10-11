@@ -38,7 +38,6 @@ const configuration: ProjectOptions = {
       return args;
     });
     config.plugin('define').tap(definitions => {
-      generateContentLibrary();
       definitions[0]['process.env']['CONTENT_LIBRARY'] = JSON.stringify(
         generateContentLibrary(),
       );
