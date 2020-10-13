@@ -14,7 +14,8 @@
     "types": [
       "webpack-env",
       "jest",
-      "@uvue/core"
+      "@uvue/core",
+      "node"
     ],
     "paths": {
       "@/*": [
