@@ -24,12 +24,8 @@ let routes: Array<RouteConfig> = [
   },
 ];
 
-export default () => {
-  // Webpack converts this variable to a JS object for us,
-  // but TypeScript still thinks it's a string | undefined.
-  // So in order to use the library object, we cast to unknown,
-  // then cast to the correct type.
-  const contentLibrary: unknown | undefined = process.env.CONTENT_LIBRARY;
+export default (contentLibrary?: ContentLibraryDataObject) => {
+  let contentRoutes: RouteConfig[] | undefined;
 
   /**
    * Recursively constructs a vue-router configuration from the DirectoryTree
@@ -62,11 +58,13 @@ export default () => {
     };
   };
 
-  const contentRoutes = (contentLibrary as ContentLibraryDataObject)?.contentLibraryChildren?.map(
-    file => buildLibraryRoutes(file),
-  );
+  if (contentLibrary) {
+    contentRoutes = contentLibrary?.contentLibraryChildren?.map(file =>
+      buildLibraryRoutes(file),
+    );
 
-  routes = routes.concat(contentRoutes || []);
+    routes = routes.concat(contentRoutes || []);
+  }
 
   const router = new VueRouter({
     mode: 'history',
