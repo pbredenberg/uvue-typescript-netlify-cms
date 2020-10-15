@@ -2,13 +2,24 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/about">About</router-link> |
+      <router-link to="/blog">Blog</router-link>
     </div>
     <router-view />
   </div>
 </template>
 <script lang="ts">
-export default {};
+import Vue from 'vue';
+import { PropValidator } from 'vue/types/options';
+import { ContentLibraryDataObject } from 'vue.config';
+
+export default Vue.extend({
+  props: {
+    contentLibrary: {
+      type: Object,
+    } as PropValidator<ContentLibraryDataObject>,
+  },
+});
 </script>
 <style lang="scss">
 #app {

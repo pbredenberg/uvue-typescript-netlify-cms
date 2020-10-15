@@ -10,7 +10,14 @@ export interface ArticleMarkdownFile {
 }
 
 export interface ContentLibraryDataObject extends dirTree.DirectoryTree {
+  /**
+   * The raw result from the front-matter library so the app can access
+   * markdown file frontmatter.
+   */
   fileContent?: FrontMatterResult<ArticleMarkdownFile>;
+  /**
+   * The parsed HTML from markdown-it which can be used to render page content.
+   */
   htmlContent?: string;
   contentLibraryChildren?: ContentLibraryDataObject[];
 }
