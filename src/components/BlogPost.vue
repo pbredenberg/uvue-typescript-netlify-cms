@@ -1,5 +1,5 @@
 <template>
-  <div class="blog__post">
+  <div class="blog-item">
     <article v-html="this.htmlContent"></article>
   </div>
 </template>

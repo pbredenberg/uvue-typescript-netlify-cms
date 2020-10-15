@@ -1,9 +1,8 @@
 import Vue from 'vue';
 import VueRouter, { RouteConfig } from 'vue-router';
 import { ContentLibraryDataObject } from '../../vue.config';
+import { componentMap } from '../route-component-map';
 import Home from '../views/Home.vue';
-import Blog from '../components/Blog.vue';
-import BlogPost from '../components/BlogPost.vue';
 
 Vue.use(VueRouter);
 
@@ -38,15 +37,15 @@ export default (contentLibrary?: ContentLibraryDataObject) => {
     // Exclude content directory from what will become the route URL.
     const routePath = file.path.replace('src/_content', '');
 
-    const isDirectory = file.type === 'directory';
+    const indexName = file.indexName;
 
     return {
       // If an extension is defined, remove that from the route path.
       path: file.extension ? routePath.replace(file.extension, '') : routePath,
-      // TODO: Provide more generic default route components other than "Blog"
-      // and "BlogPost," with the intention that users should be able to  implement
-      // their own custom component types.
-      component: isDirectory ? Blog : BlogPost,
+      component:
+        file.type === 'file'
+          ? componentMap[indexName].itemComponent
+          : componentMap[indexName].indexComponent,
       props: {
         fileContent: file.fileContent,
         htmlContent: file.htmlContent,
