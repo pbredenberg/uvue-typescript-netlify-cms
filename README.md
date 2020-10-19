@@ -16,7 +16,7 @@ npm install
 This is the standard Vue CLI tooling command.
 
 ```bash
-npm run serve
+npm run dev
 ```
 
 ### Runs Netlify CMS local backend
@@ -27,7 +27,7 @@ This doesn't provide hot-reloading or anything fancy, but it does let you test t
 CMS locally.
 
 ```bash
-npm run serve:cms
+npm run dev:cms
 ```
 
 The CMS admin should now be available at: <http://127.0.0.1:8080/admin>
