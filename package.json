@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "npm run build:config && vue-cli-service serve --port 3000",
-    "build:config": "tsc -m commonjs --esModuleInterop vue.config.ts",
-    "serve:cms": "npm run build && concurrently \"netlify-cms-proxy-server\" \"http-server ./dist\"",
+    "dev": "npm run build:config && vue-cli-service serve --port 3000",
+    "dev:cms": "npm run build && concurrently \"netlify-cms-proxy-server\" \"http-server ./dist\"",
     "build": "npm run build:config && vue-cli-service ssr:static",
+    "build:config": "tsc -m commonjs --esModuleInterop vue.config.ts",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
     "ssr:fix": "vue-cli-service ssr:fix",
