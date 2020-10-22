@@ -1,9 +1,8 @@
-# Vue.js, UVue, TypeScript + Netlify CMS (EXPERIMENTAL)
+# Vue.js, UVue, TypeScript + Netlify CMS
 
-An **experimental** project to combine a more conventional static-generated Vue.js app
-while leveraging Netlify CMS.
+## Deploy To Netilfy
 
-This is not working yet! Not recommended for production.
+<a href="https://app.netlify.com/start/deploy?repository=https://github.com/pbredenberg/uvue-typescript-netlify-cms&amp;stack=cms"><img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify"></a>
 
 ## Project Setup & Commands
 
