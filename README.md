@@ -1,8 +1,19 @@
-# Vue.js, UVue, TypeScript + Netlify CMS
+# Vue.js, UVue, TypeScript + Netlify CMS (EXPERIMENTAL)
 
-This project is a conventional approach to statically generating a Vue.js app while leveraging Netlify CMS.
+This project is an EXPERIMENTAL conventional approach to statically generating a Vue.js app while leveraging Netlify CMS.
 
-Many Vue.js-based static site generators require newcomers to learn—to some degree of additional complexity—a layer of abstraction over Vue.js (Nuxt.js, VuePress, Gridsome, etc).
+Why _experimental_? Because it's still a little weird, some things are a little
+counter-intuitive.
+
+## What You Should Know
+
+1. Previews in the CMS editor are totally raw and only show you un-styled content as you write it. This is because Netlify CMS only supports React components which are used to [display a preview of content](https://www.netlifycms.org/docs/customization/) while editing.
+
+2. The build process relies on precise naming of components and content. For instance, whatever collections you configure in `public/admin/config.yml` you must account for when configuring `src/route-component-map.ts`.
+
+## Why Make This?
+
+Many Vue.js-based static site generators require newcomers to learn—to some degree of additional complexity, a layer of abstraction over Vue.js (Nuxt.js, VuePress, Gridsome, etc).
 
 [UVue](https://universal-vue.github.io/docs/) is an excellent option for building server-generated Vue.js sites, and is a little “closer to the metal” in the opinion of this project’s author.
 
